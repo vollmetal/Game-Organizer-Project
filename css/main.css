@@ -1,0 +1,8 @@
+.overlay-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#gameCard {
+    width: 10rem;
+}
