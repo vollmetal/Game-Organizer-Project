@@ -1,8 +1,44 @@
+body {
+    background-color: #202020;
+    
+}
+
+.btn {
+    background-color: rgb(137, 137, 137);
+    color: black;
+}
+
+.mainBody {
+    color: white;
+    display: flex;
+}
+
 .overlay-content {
     display: flex;
     flex-wrap: wrap;
 }
 
-#gameCard {
+#navbar {
+    max-width: 10rem;
+    padding: 1rem;
+}
+
+.overlay-content li {
+    list-style-type: none;
+}
+
+.gameCard {
+    
+    margin: 1rem;
     width: 10rem;
+    height: 10rem;
+}
+.card {
+    background-color:  orange;
+    color: black;
+}
+
+#pageNaviagtion {
+    display: flex;
+    justify-content: center;
 }
