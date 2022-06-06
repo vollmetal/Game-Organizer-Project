@@ -3,9 +3,19 @@ body {
     
 }
 
+a {
+    color: black;
+    text-decoration: none;
+}
+
 .btn {
     background-color: rgb(137, 137, 137);
     color: black;
+}
+
+.navbar {
+    background-color: rgb(137, 137, 137);
+    color: white;
 }
 
 .mainBody {
@@ -13,7 +23,7 @@ body {
     display: flex;
 }
 
-.overlay-content {
+.listContent {
     display: flex;
     flex-wrap: wrap;
 }
@@ -23,8 +33,14 @@ body {
     padding: 1rem;
 }
 
-.overlay-content li {
+.listContent li {
     list-style-type: none;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .gameCard {
@@ -34,11 +50,12 @@ body {
     height: 10rem;
 }
 .card {
-    background-color:  orange;
+    background-color:  rgb(137, 137, 137);
     color: black;
 }
 
 #pageNaviagtion {
+    padding-top: 1rem;
     display: flex;
     justify-content: center;
 }
