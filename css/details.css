@@ -1,11 +1,39 @@
-#detailTabs li button{
-    background-color: rgb(137, 137, 137);
+
+.tabs{
+    width: 100%;
+    height: 350px;
+}
+.tabs .tab_bar{
+    height: 15%;
+}
+.tabs .tab_bar button{
+    width: 25%;
+    height: 100%;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(145, 10, 10);
+
+}
+.tabs .tab_bar button:hover{
+    background-color: #d7d4d4;
+}
+.tabs .tabsPanel{
+    height: 85%;
     color: white;
+    text-align: center;
+    padding-top: 50px;
 }
 
-#detailTabs li {
-    margin-left: 3rem;
-}
+img {
+    max-width: 50%;
+    max-height: 50%;
+    display: block;
+    margin: auto;
+   }
+
 
 #detailWindow {
     display: flex;
@@ -18,8 +46,10 @@
 }
 
 #detailBody {
-    display: flex;
+    display: block;
     justify-content: space-evenly;
+    text-align: center;
+    
 }
 
 #gameTitle {
