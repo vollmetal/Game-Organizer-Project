@@ -80,7 +80,7 @@ function drawDetailTab (info) {
     let releaseElement = ''
     if (info.esrb_rating == null)
     {
-        ratingElement = `Not yet rated`
+        ratingElement = `<h2 id="ESRBRating">NOT YET RATED</h2>`
     }
     else {
         ratingElement = `<h2 id="ESRBRating">Rated: ${info.esrb_rating.name}</h2>`
@@ -95,7 +95,7 @@ function drawDetailTab (info) {
         </div>`
     }
     if (info.released == null) {
-        releaseElement = `No release date found`
+        releaseElement = `<h2 id="releaseDate">NO RELEASE DATE FOUND</h2>`
     }
     else {
         releaseElement = `<h2 id="releaseDate">Released: ${info.released}</h2>`
