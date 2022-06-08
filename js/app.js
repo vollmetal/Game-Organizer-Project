@@ -49,9 +49,12 @@ function getFilterData (url, displayFunction, displayElement, filterClass, filte
 function displayFilters(info, element, elementName, filterTracker) {
     
     let tempString = info.map(function (filterElement) {
-        return `<input type="checkbox" name="" class="${elementName}Item" id="${filterElement.id}">${filterElement.name}</input>`
+        return `<div class="filterBox">
+        <input type="checkbox" name="" class="${elementName}Item" id="${filterElement.id}">
+        <h4>${filterElement.name}</h4>
+      </div>`
     })
-    element.innerHTML = tempString
+    element.innerHTML = tempString.join('')
     console.log(element.getElementsByClassName(`${elementName}Item`))
     let filters = element.getElementsByClassName(`${elementName}Item`)
     for (let index = 0; index < filters.length; index++) {
