@@ -172,9 +172,12 @@ SEARCH_BUTTON.addEventListener('click', function () {
 })
 
 function sortSetup(index) {
-    let menuItems = SORT_BUTTON.querySelectorAll('.dropdown-item')
+    let sortButton = document.getElementById('searchSortButton')
+    let menuItems = SORT_BUTTON.parentElement.querySelectorAll('.dropdown-item')
     searchSort = SORT_TYPES[index]
-    SORT_BUTTON.innerHTML = menuItems[index].innerHTML
+    console.log(SORT_BUTTON.innerText)
+    console.log(menuItems[index])
+    sortButton.innerHTML = menuItems[index].innerHTML
 }
 
 searchSort = 'rating'
