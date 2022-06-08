@@ -37,9 +37,9 @@ function callAPI (apiURL, drawCall)
     return result.json()
 })
 .then (function (gameResult) {
+    console.log(gameResult)
     drawCall(gameResult)
-    drawReviewsTab(gameResult.metacritic_platforms)
-    selectedGameInfo = gameResult
+    drawReviewsTab(gameResult)
 })
 .catch(function(error) {
     console.log(error)
@@ -110,18 +110,58 @@ function drawDetailTab (info) {
 }
 
 function drawReviewsTab (info) {
-    let ratings = info.map(function (rating) {
+
+    
+    let platforms = info.platforms.map(function (platform) {
+        let platformRequirements = ''
+        let platformId = -1
+        let platformRatingElement = ''
+        //Set Requirements Section
+        if (platform.requirements.minimum == null && platform.requirements.recommended == null) {
+            
+        }
+        else {
+            platformRequirements = `<div class="platformSpecs">
+            <p class="minimumRequirements">${platform.requirements.minimum}</p>
+            <p class="maximumRequirements">${platform.requirements.recommended}</p>
+          </div>`
+        }
+        //Set Ratings Section
+        if (info.metacritic_platforms.length > 0) {
+            for (let index = 0; index < info.metacritic_platforms.length; index++) {
+                const reviewPlatform = info.metacritic_platforms[index]
+                if (reviewPlatform.platform.name == platform.platform.name) {
+                    platformId = index
+                    break
+                }
+                
+            }
+            console.log(platformId)
+            if (platformId > -1)
+            {
+                platformRatingElement = `<div class="ratingSection">
+
+            <h3 class="platformRating">Metascore = ${info.metacritic_platforms[platformId].metascore}/100</h3>
+            <a href="${info.metacritic_platforms[platformId].url}" class="reviewLink">Metacritic Page</a>
+          </div>`
+            }
+            
+        }
+
         return `<li class="reviewCard">
         <div class="card">
-          <div class="cardBody">
-            <h3 class="reviewRating">${rating.metascore}</h3>
-            <p class="reviewPlatform">${rating.platform.name}</p>
-            <a href="${rating.url}" class="reviewLink">Rerview Page</a>
-          </div>
+        <div class="cardBody">
+                        
+        <h3 class="platformName">${platform.platform.name}</h3>
+        <h5>Released on: ${platform.released_at}
+        ${platformRequirements}
+        ${platformRatingElement}
+        
+      </div>
         </div>
       </li>`
     })
-    reviewList.innerHTML = ratings
+    reviewList.innerHTML = platforms.join('')
 
 }
 
