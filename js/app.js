@@ -136,7 +136,7 @@ function displayGame (info) {
           <div class="cardBody">
             <h3 class="gameName">${game.name}</h3>
             <p class="gameShortDescription">test</p>
-            <a href="gamedetails.html?${game.id}" class="gameDetails">More information</a>
+            <a href="gamedetails.html?id=${game.id}" class="gameDetails">More information</a>
           </div>
         </div>
       </li>`
