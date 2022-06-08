@@ -13,9 +13,7 @@ const SEARCH_BUTTON = document.getElementById('searchButton')
 const PAGE_NAVIGATOR = document.getElementById('pageNaviagtion')
 
 const SORT_BUTTON = document.getElementById('searchSortButton')
-const SORT_BY_POPULARITY = document.getElementById('searchSortPopularity')
-const SORT_BY_AZ = document.getElementById('searchSortAlphaAscending')
-const SORT_BY_ZA = document.getElementById('searchSortAlphaDescending')
+const SORT_TYPES = ['rating', 'name', '-name']
 
 let fetchPosition = 'games'
 
@@ -135,7 +133,7 @@ function displayGame (info) {
           <img src="${game.background_image}" alt="No Image Found" class="gameImage" />
           <div class="cardBody">
             <h3 class="gameName">${game.name}</h3>
-            <p class="gameShortDescription">test</p>
+            <p class="gameTags">test</p>
             <a href="gamedetails.html?${game.id}" class="gameDetails">More information</a>
           </div>
         </div>
@@ -170,20 +168,11 @@ SEARCH_BUTTON.addEventListener('click', function () {
     getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
 })
 
-SORT_BY_POPULARITY.addEventListener('click', function() {
-    searchSort = 'rating'
-    SORT_BUTTON.innerHTML = "Highest Rated"
-})
-
-SORT_BY_AZ.addEventListener('click', function() {
-    searchSort = 'name'
-    SORT_BUTTON.innerHTML = "Alphabetical A-Z"
-})
-
-SORT_BY_ZA.addEventListener('click', function() {
-    searchSort = '-name'
-    SORT_BUTTON.innerHTML = "Alphabetical Z-A"
-})
+function sortSetup(index) {
+    let menuItems = SORT_BUTTON.querySelectorAll('.dropdown-item')
+    searchSort = SORT_TYPES[index]
+    SORT_BUTTON.innerHTML = menuItems[index].innerHTML
+}
 
 searchSort = 'rating'
 SORT_BUTTON.innerHTML = "Highest Rated"
