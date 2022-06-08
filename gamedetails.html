@@ -39,33 +39,32 @@
         <div class="detailBody">
           <h1 id="gameTitle">Game Title</h1>
           <img src="" alt="" id="gameBackground">
-          <ul class="nav nav-tabs" id="detailTabs">
-            <li class="nav-item" id="details">
-              <button class="nav-link active" aria-current="page">Details</button>
-            </li>
-            <li class="nav-item" id="gameImages">
-              <button class="nav-link">Link</button>
-            </li>
-            <li class="nav-item" id="gameReviews">
-              <button class="nav-link">Reviews</button>
-            </li>
-            <li class="nav-item" id="gameNews">
-              <button class="nav-link">News</button>
-            </li>
-          </ul>
-          <div id="detailWindow">
-            <div id="detailHeader">
-              <h2 id="ESRBRating">M</h2>
-              <h2 id="releaseDate">Released: </h2>
+          <div class="tabs">
+            <div class="tabs_bar">
+              <button onclick="showPanel(0, 'gray')">Details</button>
+              <button onclick="showPanel(1, 'gray')">News</button>
+              <button onclick="showPanel(2, 'gray')">Reviews</button>
+              <button onclick="showPanel(3, 'gray')">Platforms</button>
             </div>
-            <div id="detailBody">
-              <p id="description">description here</p>
-            <div id="systemSpecs">
-              <h3 id="">Spec1</h3>
-              <h3 id="">Spec2</h3>
+            <div class="tabPanel">
+              <div id="detailWindow">
+                <div id="detailHeader">
+                  <h2 id="ESRBRating">M</h2>
+                  <h2 id="releaseDate">Released: </h2>
+                </div>
+                <div id="detailBody">
+                  <p id="description">description here</p>
+                <div id="systemSpecs">
+                  <h3 id="">Spec1</h3>
+                  <h3 id="">Spec2</h3>
+                </div>
+                </div>
+                
+              </div>
             </div>
-            </div>
-            
+            <div class="tabPanel">content 2</div> 
+            <div class="tabPanel">content 3</div>
+            <div class="tabPanel">content 4</div>
           </div>
         </div>
         <script src="js/detailPage.js"></script>
