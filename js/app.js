@@ -7,6 +7,7 @@ const GENRE_FILTER_CLASS = 'genreFilter'
 const PLATFORM_FILTER_ELEMENT = document.getElementById('platformFilter')
 const GENRE_FILTER_ELEMENT = document.getElementById('genreFilter')
 const GAME_LIST_ELEMENT = document.getElementById('gameList')
+const SEARCH_TEXT_BOX = document.getElementById('titleSearchBox')
 
 const SEARCH_BUTTON = document.getElementById('searchButton')
 
@@ -16,6 +17,7 @@ let filterPlatforms = []
 let filterGenres = []
 
 let finishedURL = '';
+let searchSort = ''
 
 function lookAtPage (positions = '', keys = '') {
     return `${BASE_URL}${positions}?${keys}${API_KEY}`
@@ -114,7 +116,7 @@ SEARCH_BUTTON.addEventListener('click', function () {
         fullGenreString = `genres=${filterGenres.join(',')}&`
     }
     
-    getGameData(`${fullPlatformString}${fullGenreString}`, displayGame)
+    getGameData(`${fullPlatformString}${fullGenreString}search=${SEARCH_TEXT_BOX.value}&`, displayGame)
 })
 
 getFilterData('genres', displayFilters, GENRE_FILTER_ELEMENT, GENRE_FILTER_CLASS, filterGenres)
