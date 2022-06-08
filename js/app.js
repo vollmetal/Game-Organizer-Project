@@ -12,6 +12,11 @@ const SEARCH_TEXT_BOX = document.getElementById('titleSearchBox')
 const SEARCH_BUTTON = document.getElementById('searchButton')
 const PAGE_NAVIGATOR = document.getElementById('pageNaviagtion')
 
+const SORT_BUTTON = document.getElementById('searchSortButton')
+const SORT_BY_POPULARITY = document.getElementById('searchSortPopularity')
+const SORT_BY_AZ = document.getElementById('searchSortAlphaAscending')
+const SORT_BY_ZA = document.getElementById('searchSortAlphaDescending')
+
 let fetchPosition = 'games'
 
 let filterPlatforms = []
@@ -21,6 +26,7 @@ let currentPage = 1
 
 let finishedURL = '';
 let searchSort = ''
+let pageSize = 50
 
 function lookAtPage (positions = '', keys = '') {
     return `${BASE_URL}${positions}?${keys}${API_KEY}`
@@ -126,7 +132,7 @@ function displayGame (info) {
     let tempString = info.map(function (game) {
         return `<li class="gameCard">
         <div class="card">
-          <img src="${game.background_image}" alt="" class="gameImage" />
+          <img src="${game.background_image}" alt="No Image Found" class="gameImage" />
           <div class="cardBody">
             <h3 class="gameName">${game.name}</h3>
             <p class="gameShortDescription">test</p>
@@ -161,9 +167,26 @@ function gameSearchSetup () {
 SEARCH_BUTTON.addEventListener('click', function () {
     
     currentPage = 1
-    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&`), displayGame)
+    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
 })
 
+SORT_BY_POPULARITY.addEventListener('click', function() {
+    searchSort = 'rating'
+    SORT_BUTTON.innerHTML = "Highest Rated"
+})
+
+SORT_BY_AZ.addEventListener('click', function() {
+    searchSort = 'name'
+    SORT_BUTTON.innerHTML = "Alphabetical A-Z"
+})
+
+SORT_BY_ZA.addEventListener('click', function() {
+    searchSort = '-name'
+    SORT_BUTTON.innerHTML = "Alphabetical Z-A"
+})
+
+searchSort = 'rating'
+SORT_BUTTON.innerHTML = "Highest Rated"
 getFilterData('genres', displayFilters, GENRE_FILTER_ELEMENT, GENRE_FILTER_CLASS, filterGenres)
 getFilterData('platforms', displayFilters, PLATFORM_FILTER_ELEMENT, PLATFORM_FILTER_CLASS, filterPlatforms)
-getGameData(lookAtPage('games', ''), displayGame)
+getGameData(lookAtPage('games', `ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
