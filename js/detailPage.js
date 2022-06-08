@@ -34,6 +34,22 @@ function callAPI (apiURL, drawCall)
 })
 }
 
+var tabButtons=document.querySelectorAll(".tabs .tabs_bar button")
+var tabPanels=document.querySelectorAll(".tabs .tabPanel ")
+
+function showPanel(panelIndex, colorCode) {
+    tabButtons.forEach(function(node){
+        node.style.backgroundColor="";
+        node.style.color="";
+    });
+    tabButtons[panelIndex].style.backgroundColor=colorCode;
+    tabButtons[panelIndex].style.color="white";
+    tabPanels.forEach(function(node) {
+        node.style.display="none";
+    });
+    tabPanels[panelIndex].style.display="block"
+    tabPanels[panelIndex].style.backgroundColor=colorCode;
+}
 function drawDetailTab (info) {
     let tabString = `<div id="detailHeader">
     <h2 id="ESRBRating">Rated: ${info.esrb_rating.name}</h2>
