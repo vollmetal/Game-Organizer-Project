@@ -1,4 +1,4 @@
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -71,9 +71,9 @@
                       Dropdown button
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="searchSortButton">
-                      <li><a class="dropdown-item" href="">Popularity</a></li>
-                      <li><a class="dropdown-item" href="">Alphabetical A-Z</a></li>
-                      <li><a class="dropdown-item" href="">Alphabetical Z-A</a></li>
+                      <li><button class="dropdown-item" id="searchSortPopularity">Highest Rated</button></li>
+                      <li><button class="dropdown-item" id="searchSortAlphaAscending">Alphabetical A-Z</button></li>
+                      <li><button class="dropdown-item" id="searchSortAlphaDescending">Alphabetical Z-A</button></li>
                     </ul>
                   </div>
             </li>
@@ -97,13 +97,10 @@
       </div>
     </div>
     <!--List Navigation-->
-    <nav id="pageNaviagtion" aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    <nav  aria-label="Page navigation example">
+      <ul class="pagination" id="pageNaviagtion">
+        <li class="page-item"><button class="page-link" id="previousButton">Previous</button></li>
+        <li class="page-item"><button class="page-link" id="nextButton">Next</button></li>
       </ul>
     </nav>
 
