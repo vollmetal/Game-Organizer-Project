@@ -10,11 +10,14 @@ const GAME_LIST_ELEMENT = document.getElementById('gameList')
 const SEARCH_TEXT_BOX = document.getElementById('titleSearchBox')
 
 const SEARCH_BUTTON = document.getElementById('searchButton')
+const PAGE_NAVIGATOR = document.getElementById('pageNaviagtion')
 
 let fetchPosition = 'games'
 
 let filterPlatforms = []
 let filterGenres = []
+
+let currentPage = 1
 
 let finishedURL = '';
 let searchSort = ''
@@ -70,17 +73,53 @@ function displayFilters(info, element, elementName, filterTracker) {
 }
 
 function getGameData (urlKeys, displayFunction) {
-    fetch(lookAtPage('games', urlKeys))
+    fetch(urlKeys)
     .then(function(results) {
         return results.json()
     })
     .then (function (gameResults) {
         console.log(gameResults)
         displayFunction(gameResults.results)
+        displayPageNavigator(gameResults)
     })
     .catch(function (error) {
         console.log(error)
     })
+}
+
+function displayPageNavigator (info) {
+    let nextPage = ``
+    let previousPage = ``
+
+    if (info.next == null)
+    {
+        nextPage = `<li class="page-item disabled"><span class="page-link">Next</span></li>`
+    }
+    else 
+    {
+        nextPage = `<li class="page-item"><button class="page-link" id="nextButton">Next</button></li>`
+    }
+    if (info.previous == null)
+    {
+        previousPage = `<li class="page-item disabled"><span class="page-link">Previous</span></li>`
+    }
+    else 
+    {
+        previousPage = `<li class="page-item"><button class="page-link" id="previousButton">Previous</button></li>`
+    }
+    PAGE_NAVIGATOR.innerHTML = `${previousPage}${nextPage}`
+    let nextPageButton = document.getElementById('nextButton')
+    let previousPageButton = document.getElementById('previousButton')
+        nextPageButton.addEventListener('click', function () {
+            currentPage++
+            getGameData(info.next, displayGame)
+        })
+    
+        previousPageButton.addEventListener('click', function () {
+            currentPage--
+            getGameData(info.previous, displayGame)
+        })
+    
 }
 
 function displayGame (info) {
@@ -99,7 +138,7 @@ function displayGame (info) {
     GAME_LIST_ELEMENT.innerHTML = tempString.join('')
 }
 
-SEARCH_BUTTON.addEventListener('click', function () {
+function gameSearchSetup () {
     let fullPlatformString = ''
     let fullGenreString = ''
     if (filterPlatforms.length > 0 && filterGenres.length > 0)
@@ -115,10 +154,16 @@ SEARCH_BUTTON.addEventListener('click', function () {
     {
         fullGenreString = `genres=${filterGenres.join(',')}&`
     }
+
+    return `${fullPlatformString}${fullGenreString}`
+}
+
+SEARCH_BUTTON.addEventListener('click', function () {
     
-    getGameData(`${fullPlatformString}${fullGenreString}search=${SEARCH_TEXT_BOX.value}&`, displayGame)
+    currentPage = 1
+    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&`), displayGame)
 })
 
 getFilterData('genres', displayFilters, GENRE_FILTER_ELEMENT, GENRE_FILTER_CLASS, filterGenres)
 getFilterData('platforms', displayFilters, PLATFORM_FILTER_ELEMENT, PLATFORM_FILTER_CLASS, filterPlatforms)
-getGameData(``, displayGame)
+getGameData(lookAtPage('games', ''), displayGame)
