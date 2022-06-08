@@ -40,14 +40,18 @@
         <ul class="nav flex-column">
             <li class="nav-item">
               <h3>Genres</h3>
-              <div id="genreFilter">
-                <input type="checkbox" name="" id="FPS">First Person Shooter</input>
+              <div class="searchFilter" id="genreFilter">
+                <div class="filterBox">
+                  <h4>First Person Shooter</h4>
+                  <input type="checkbox" name="" id="FPS">
+                </div>
+                
               </div>
               
             </li>
             <li class="nav-item">
               <h3>Platforms</h3>
-              <div id="platformFilter">
+              <div class="searchFilter" id="platformFilter">
                 <input type="checkbox" name="" id="xBoxOne">XBox One</input>
               </div>
             </li>
@@ -71,9 +75,9 @@
                       Dropdown button
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="searchSortButton">
-                      <li><button class="dropdown-item" id="searchSortPopularity">Highest Rated</button></li>
-                      <li><button class="dropdown-item" id="searchSortAlphaAscending">Alphabetical A-Z</button></li>
-                      <li><button class="dropdown-item" id="searchSortAlphaDescending">Alphabetical Z-A</button></li>
+                      <li><button class="dropdown-item" onclick="sortSetup(0)" id="searchSortPopularity">Highest Rated</button></li>
+                      <li><button class="dropdown-item" onclick="sortSetup(1)" id="searchSortAlphaAscending">Alphabetical A-Z</button></li>
+                      <li><button class="dropdown-item" onclick="sortSetup(2)" id="searchSortAlphaDescending">Alphabetical Z-A</button></li>
                     </ul>
                   </div>
             </li>
