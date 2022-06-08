@@ -167,7 +167,7 @@ function gameSearchSetup () {
 SEARCH_BUTTON.addEventListener('click', function () {
     
     currentPage = 1
-    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
+    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&search_precise=True&search_exact=True&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
 })
 
 SORT_BY_POPULARITY.addEventListener('click', function() {

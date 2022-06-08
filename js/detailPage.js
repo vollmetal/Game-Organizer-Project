@@ -7,8 +7,10 @@ const gameBackground = document.getElementById('gameBackground')
 
 const detailTab = document.getElementById('details')
 const imagesTab = document.getElementById('gameImages')
-const reviewsTab = document.getElementById('gameReviews')
+const reviewsTab = document.getElementById('reviewsTab')
 const newsTab = document.getElementById('gameNews')
+
+const reviewList = document.getElementById('reviewList')
 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
@@ -19,6 +21,9 @@ let gameID = params.id;
 let fetchPosition = 'games'
 
 let finishedURL = '';
+let searchOrder = '';
+
+let selectedGameInfo = ''
 
 let currentTab = 'DETAILS'
 
@@ -33,6 +38,8 @@ function callAPI (apiURL, drawCall)
 })
 .then (function (gameResult) {
     drawCall(gameResult)
+    drawReviewsTab(gameResult.metacritic_platforms)
+    selectedGameInfo = gameResult
 })
 .catch(function(error) {
     console.log(error)
@@ -55,6 +62,18 @@ function showPanel(panelIndex, colorCode) {
     tabPanels[panelIndex].style.display="block"
     tabPanels[panelIndex].style.backgroundColor=colorCode;
 }
+
+
+let searchSortButton = document.getElementById('searchSortButton')
+function selectSortItem (dropdownIndex) {
+    let searchSort = searchSortButton.parentElement.querySelectorAll(".dropdown-item")
+    searchSortButton.innerHTML = searchSort[dropdownIndex].innerHTML
+    searchOrder = searchSort[dropdownIndex].innerHTML
+
+}
+
+
+
 function drawDetailTab (info) {
     let ratingElement = ''
     let descriptionElement = ''
@@ -90,6 +109,22 @@ function drawDetailTab (info) {
   detailWindow.innerHTML = tabString
 }
 
+function drawReviewsTab (info) {
+    let ratings = info.map(function (rating) {
+        return `<li class="reviewCard">
+        <div class="card">
+          <div class="cardBody">
+            <h3 class="reviewRating">${rating.metascore}</h3>
+            <p class="reviewPlatform">${rating.platform.name}</p>
+            <a href="${rating.url}" class="reviewLink">Rerview Page</a>
+          </div>
+        </div>
+      </li>`
+    })
+    reviewList.innerHTML = ratings
+
+}
+
 function drawTop (info) {
     gameTitle.innerHTML = info.name
     gameBackground.src = info.background_image
@@ -97,3 +132,4 @@ function drawTop (info) {
 
 callAPI(finishedURL, drawTop)
 callAPI(finishedURL, drawDetailTab)
+showPanel(0, 'gray')
