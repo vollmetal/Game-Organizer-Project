@@ -10,7 +10,12 @@ const imagesTab = document.getElementById('gameImages')
 const reviewsTab = document.getElementById('gameReviews')
 const newsTab = document.getElementById('gameNews')
 
-let gameID = 3498;
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
+
+console.log(params)
+
+let gameID = params.id;
 let fetchPosition = 'games'
 
 let finishedURL = '';
@@ -51,13 +56,36 @@ function showPanel(panelIndex, colorCode) {
     tabPanels[panelIndex].style.backgroundColor=colorCode;
 }
 function drawDetailTab (info) {
+    let ratingElement = ''
+    let descriptionElement = ''
+    let releaseElement = ''
+    if (info.esrb_rating == null)
+    {
+        ratingElement = `Not yet rated`
+    }
+    else {
+        ratingElement = `<h2 id="ESRBRating">Rated: ${info.esrb_rating.name}</h2>`
+    }
+    if (info.description == null) {
+        descriptionElement = `No Description`
+    }
+    else {
+        descriptionElement = `
+        <div id="detailBody">
+          <p id="description">${info.description}</p>
+        </div>`
+    }
+    if (info.released == null) {
+        releaseElement = `No release date found`
+    }
+    else {
+        releaseElement = `<h2 id="releaseDate">Released: ${info.released}</h2>`
+    }
     let tabString = `<div id="detailHeader">
-    <h2 id="ESRBRating">Rated: ${info.esrb_rating.name}</h2>
-    <h2 id="releaseDate">Released: ${info.released}</h2>
-  </div>
-  <div id="detailBody">
-    <p id="description">${info.description}</p>
-  </div>`
+    ${ratingElement}
+    ${releaseElement}
+    </div>
+    ${descriptionElement}`
 
   detailWindow.innerHTML = tabString
 }
