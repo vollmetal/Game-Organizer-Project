@@ -7,13 +7,23 @@ const gameBackground = document.getElementById('gameBackground')
 
 const detailTab = document.getElementById('details')
 const imagesTab = document.getElementById('gameImages')
-const reviewsTab = document.getElementById('gameReviews')
+const reviewsTab = document.getElementById('reviewsTab')
 const newsTab = document.getElementById('gameNews')
 
-let gameID = 3498;
+const reviewList = document.getElementById('reviewList')
+
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
+
+console.log(params)
+
+let gameID = params.id;
 let fetchPosition = 'games'
 
 let finishedURL = '';
+let searchOrder = '';
+
+let selectedGameInfo = ''
 
 let currentTab = 'DETAILS'
 
@@ -28,22 +38,91 @@ function callAPI (apiURL, drawCall)
 })
 .then (function (gameResult) {
     drawCall(gameResult)
+    drawReviewsTab(gameResult.metacritic_platforms)
+    selectedGameInfo = gameResult
 })
 .catch(function(error) {
     console.log(error)
 })
 }
 
+var tabButtons=document.querySelectorAll(".tabs .tabs_bar button")
+var tabPanels=document.querySelectorAll(".tabs .tabPanel ")
+
+function showPanel(panelIndex, colorCode) {
+    tabButtons.forEach(function(node){
+        node.style.backgroundColor="";
+        node.style.color="";
+    });
+    tabButtons[panelIndex].style.backgroundColor=colorCode;
+    tabButtons[panelIndex].style.color="white";
+    tabPanels.forEach(function(node) {
+        node.style.display="none";
+    });
+    tabPanels[panelIndex].style.display="block"
+    tabPanels[panelIndex].style.backgroundColor=colorCode;
+}
+
+
+let searchSortButton = document.getElementById('searchSortButton')
+function selectSortItem (dropdownIndex) {
+    let searchSort = searchSortButton.parentElement.querySelectorAll(".dropdown-item")
+    searchSortButton.innerHTML = searchSort[dropdownIndex].innerHTML
+    searchOrder = searchSort[dropdownIndex].innerHTML
+
+}
+
+
+
 function drawDetailTab (info) {
+    let ratingElement = ''
+    let descriptionElement = ''
+    let releaseElement = ''
+    if (info.esrb_rating == null)
+    {
+        ratingElement = `Not yet rated`
+    }
+    else {
+        ratingElement = `<h2 id="ESRBRating">Rated: ${info.esrb_rating.name}</h2>`
+    }
+    if (info.description == null) {
+        descriptionElement = `No Description`
+    }
+    else {
+        descriptionElement = `
+        <div id="detailBody">
+          <p id="description">${info.description}</p>
+        </div>`
+    }
+    if (info.released == null) {
+        releaseElement = `No release date found`
+    }
+    else {
+        releaseElement = `<h2 id="releaseDate">Released: ${info.released}</h2>`
+    }
     let tabString = `<div id="detailHeader">
-    <h2 id="ESRBRating">Rated: ${info.esrb_rating.name}</h2>
-    <h2 id="releaseDate">Released: ${info.released}</h2>
-  </div>
-  <div id="detailBody">
-    <p id="description">${info.description}</p>
-  </div>`
+    ${ratingElement}
+    ${releaseElement}
+    </div>
+    ${descriptionElement}`
 
   detailWindow.innerHTML = tabString
+}
+
+function drawReviewsTab (info) {
+    let ratings = info.map(function (rating) {
+        return `<li class="reviewCard">
+        <div class="card">
+          <div class="cardBody">
+            <h3 class="reviewRating">${rating.metascore}</h3>
+            <p class="reviewPlatform">${rating.platform.name}</p>
+            <a href="${rating.url}" class="reviewLink">Rerview Page</a>
+          </div>
+        </div>
+      </li>`
+    })
+    reviewList.innerHTML = ratings
+
 }
 
 function drawTop (info) {
@@ -53,3 +132,4 @@ function drawTop (info) {
 
 callAPI(finishedURL, drawTop)
 callAPI(finishedURL, drawDetailTab)
+showPanel(0, 'gray')

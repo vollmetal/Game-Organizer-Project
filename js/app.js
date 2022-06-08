@@ -47,9 +47,12 @@ function getFilterData (url, displayFunction, displayElement, filterClass, filte
 function displayFilters(info, element, elementName, filterTracker) {
     
     let tempString = info.map(function (filterElement) {
-        return `<input type="checkbox" name="" class="${elementName}Item" id="${filterElement.id}">${filterElement.name}</input>`
+        return `<div class="filterBox">
+        <input type="checkbox" name="" class="${elementName}Item" id="${filterElement.id}">
+        <h4>${filterElement.name}</h4>
+      </div>`
     })
-    element.innerHTML = tempString
+    element.innerHTML = tempString.join('')
     console.log(element.getElementsByClassName(`${elementName}Item`))
     let filters = element.getElementsByClassName(`${elementName}Item`)
     for (let index = 0; index < filters.length; index++) {
@@ -133,8 +136,8 @@ function displayGame (info) {
           <img src="${game.background_image}" alt="No Image Found" class="gameImage" />
           <div class="cardBody">
             <h3 class="gameName">${game.name}</h3>
-            <p class="gameTags">test</p>
-            <a href="gamedetails.html?${game.id}" class="gameDetails">More information</a>
+            <p class="gameShortDescription">test</p>
+            <a href="gamedetails.html?id=${game.id}" class="gameDetails">More information</a>
           </div>
         </div>
       </li>`
@@ -165,7 +168,7 @@ function gameSearchSetup () {
 SEARCH_BUTTON.addEventListener('click', function () {
     
     currentPage = 1
-    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
+    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&search_precise=True&search_exact=True&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
 })
 
 function sortSetup(index) {

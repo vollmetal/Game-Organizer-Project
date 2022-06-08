@@ -16,7 +16,11 @@ a {
 .navbar {
     background-color: rgb(137, 137, 137);
     color: white;
+    text-align: center;
+    list-style-position: inside;
+     
 }
+
 
 .mainBody {
     color: white;
@@ -26,6 +30,7 @@ a {
 .listContent {
     display: flex;
     flex-wrap: wrap;
+    text-align: center;
 }
 
 #navbar {
@@ -44,11 +49,16 @@ a {
 }
 
 .gameCard {
-    
-    margin: 1rem;
-    width: 10rem;
-    height: 10rem;
+    max-width: 10rem;
+    max-height: 10rem;
+    margin-right: 5rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 15rem;
 }
+
 .card {
     background-color:  rgb(137, 137, 137);
     color: black;
@@ -58,4 +68,12 @@ a {
     padding-top: 1rem;
     display: flex;
     justify-content: center;
+}
+
+.searchFilter {
+    display: flex;
+    flex-direction: column;
+}
+.filterBox {
+    display: flex;
 }
