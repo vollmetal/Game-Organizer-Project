@@ -132,14 +132,13 @@ function displayPageNavigator (info) {
 function displayGame (info) {
     let tempString = info.map(function (game) {
         return `<li class="gameCard">
-        <div class="card">
+        <a href="gamedetails.html?id=${game.id}" class="card">
           <img src="${game.background_image}" alt="No Image Found" class="gameImage" />
           <div class="cardBody">
             <h3 class="gameName">${game.name}</h3>
             <p class="gameShortDescription">test</p>
-            <a href="gamedetails.html?id=${game.id}" class="gameDetails">More information</a>
           </div>
-        </div>
+        </a>
       </li>`
     })
     GAME_LIST_ELEMENT.innerHTML = tempString.join('')
