@@ -10,7 +10,7 @@ The home page of the site sorts the games it gets by highest rating to start, wi
 ## Languages used
 Javascript, HTML, and CSS
 ## API used
-RAWG API
+RAWG API, Bootstrap
 ## Database used
 RAWG Database
 ## Contributors
