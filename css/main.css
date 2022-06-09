@@ -13,7 +13,27 @@ a {
     color: black;
 }
 
-.navbar {
+.accordion-button {
+    background-color: rgb(137, 137, 137);
+    color: black;
+}
+
+.accordion-collapse {
+    background-color: rgb(137, 137, 137);
+    color: black;
+}
+
+.accordian-item {
+    background-color: rgb(137, 137, 137);
+    color: black;
+}
+
+.img-thumbnail {
+    border-width: 0px;
+    background-color: rgb(137, 137, 137);
+}
+
+.navBar {
     background-color: rgb(137, 137, 137);
     color: white;
     text-align: center;
@@ -21,21 +41,28 @@ a {
      
 }
 
+.card {
+    background-color:  rgb(137, 137, 137);
+    color: black;
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .mainBody {
     color: white;
     display: flex;
+    padding: 1rem;
 }
 
 .listContent {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-}
-
-#navbar {
-    max-width: 10rem;
-    padding: 1rem;
+    justify-content: center;
 }
 
 .listContent li {
@@ -49,23 +76,29 @@ a {
 }
 
 .gameCard {
-    max-width: 10rem;
-    max-height: 10rem;
-    margin-right: 5rem;
+    max-width: 14rem;
+    margin-right: 3rem;
     margin-top: 5rem;
-    margin-bottom: 5rem;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 15rem;
+    margin-bottom: 3rem;
 }
 
-.card {
-    background-color:  rgb(137, 137, 137);
-    color: black;
+.gameRating {
+    text-align: end;
 }
+
+.gameImage {
+    max-height: 14rem;
+}
+
+
 
 #pageNaviagtion {
     padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+#pageDisplay {
     display: flex;
     justify-content: center;
 }
@@ -74,6 +107,33 @@ a {
     display: flex;
     flex-direction: column;
 }
-.filterBox {
+.specificFilters {
+    max-height: 4rem;
+    margin-bottom: 0.5rem;
+}
+#filterBar {
+    max-width: 13rem;
+    padding: 1rem;
+}
+
+.tagText {
     display: flex;
+    flex-wrap: wrap;
+}
+.tagText li {
+    background-color: rgb(52, 52, 52);
+    color: white;
+    padding: 2px;
+    margin: 4px;
+}
+
+@media (max-width: 780px)
+{
+    .gameCard {
+        max-width: 100%;
+
+    }
+    #filterBar {
+        display: none;
+    }
 }

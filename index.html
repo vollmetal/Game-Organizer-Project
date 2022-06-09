@@ -17,18 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="btn navbar-brand" href="index.html">SITE</a>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                      </li>
-                      
-                    </ul>
-                  </div>
+                <a class="btn navbar-brand" href="index.html">ObsidianDB</a>
             </div>
             
         </nav>
@@ -36,26 +25,46 @@
       <form id="form"></form>
     </header>
     <div class="mainBody">
-      <div id="navbar">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-              <h3>Genres</h3>
-              <div class="searchFilter" id="genreFilter">
-                <div class="filterBox">
-                  <h4>First Person Shooter</h4>
-                  <input type="checkbox" name="" id="FPS">
-                </div>
-                
+      <!--Accordion that contains filter toggles-->
+      <div c id="filterBar">
+        <div class="accordion accordion-flush" id="filtersAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="genresHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#genresCollapse" aria-expanded="false" aria-controls="genresCollapse">
+                Genres
+              </button>
+            </h2>
+            <div id="genresCollapse" class="accordion-collapse collapse" aria-labelledby="genresHeading" data-bs-parent="#filtersAccordion">
+              <div class="accordion-body" id="genreFilter">
+                Genres go here
               </div>
-              
-            </li>
-            <li class="nav-item">
-              <h3>Platforms</h3>
-              <div class="searchFilter" id="platformFilter">
-                <input type="checkbox" name="" id="xBoxOne">XBox One</input>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="platformsHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#platformsCollapse" aria-expanded="false" aria-controls="platformsCollapse">
+                Platforms
+              </button>
+            </h2>
+            <div id="platformsCollapse" class="accordion-collapse collapse" aria-labelledby="platformsHeading" data-bs-parent="#filtersAccordion">
+              <div class="accordion-body" id="platformFilter">
+                Platforms go here
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="tagsHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tagsCollapse" aria-expanded="false" aria-controls="tagsCollapse">
+                Tags
+              </button>
+            </h2>
+            <div id="tagsCollapse" class="accordion-collapse collapse" aria-labelledby="tagsHeading" data-bs-parent="#filtersAccordion">
+              <div class="accordion-body" id="tagFilter">
+                Tags go here
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!--Main Page Content-->
       <div id="content">
@@ -76,11 +85,25 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="searchSortButton">
                       <li><button class="dropdown-item" onclick="sortSetup(0)" id="searchSortPopularity">Highest Rated</button></li>
-                      <li><button class="dropdown-item" onclick="sortSetup(1)" id="searchSortAlphaAscending">Alphabetical A-Z</button></li>
-                      <li><button class="dropdown-item" onclick="sortSetup(2)" id="searchSortAlphaDescending">Alphabetical Z-A</button></li>
+                      <li><button class="dropdown-item" onclick="sortSetup(1)" id="searchSortPopularity">Lowest Rated</button></li>
+                      <li><button class="dropdown-item" onclick="sortSetup(2)" id="searchSortAlphaAscending">Alphabetical A-Z</button></li>
+                      <li><button class="dropdown-item" onclick="sortSetup(3)" id="searchSortAlphaDescending">Alphabetical Z-A</button></li>
                     </ul>
                   </div>
             </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="searchSizeButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown button
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="searchSortButton">
+                    <li><button class="dropdown-item" onclick="searchSizeChange(0)" id="searchSize10">10 Items</button></li>
+                    <li><button class="dropdown-item" onclick="searchSizeChange(1)" id="searchSize20">20 Items</button></li>
+                    <li><button class="dropdown-item" onclick="searchSizeChange(2)" id="searchSize30">30 Items</button></li>
+                    <li><button class="dropdown-item" onclick="searchSizeChange(3)" id="searchSize40">40 Items</button></li>
+                  </ul>
+                </div>
+          </li>
             <li class="nav-item">
               <button class="btn btn-primary" id="searchButton">Search</button>
             </li>
@@ -92,6 +115,12 @@
               <img src="..." alt="" class="gameImage" />
               <div class="cardBody">
                 <h3 class="gameName">BLARG</h3>
+                <div class="tagDisplay">
+                  <span>Tags:</span>
+                  <ul class="tagText">
+                    <li><span>tagName</span></li>
+                  </ul>
+                </div>
                 <p class="gameShortDescription">test</p>
                 <a href="#" class="gameDetails">More information</a>
               </div>
@@ -101,12 +130,16 @@
       </div>
     </div>
     <!--List Navigation-->
-    <nav  aria-label="Page navigation example">
-      <ul class="pagination" id="pageNaviagtion">
-        <li class="page-item"><button class="page-link" id="previousButton">Previous</button></li>
-        <li class="page-item"><button class="page-link" id="nextButton">Next</button></li>
-      </ul>
-    </nav>
+    <div>
+      <h3 id="pageDisplay">Page /</h3>
+      <nav  aria-label="Page navigation">
+        <ul class="pagination" id="pageNaviagtion">
+          <li class="page-item"><button class="page-link" id="previousButton">Previous</button></li>
+          <li class="page-item"><button class="page-link" id="nextButton">Next</button></li>
+        </ul>
+      </nav>
+    </div>
+    
 
     <script src="js/app.js"></script>
     <script

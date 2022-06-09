@@ -1,26 +1,36 @@
 const API_KEY = 'key=c9c9bfee8c9142a39a386a9fdc2edd22';
 const BASE_URL = 'https://api.rawg.io/api/';
 
-const PLATFORM_FILTER_CLASS = 'platformFilter'
-const GENRE_FILTER_CLASS = 'genreFilter'
+const SPECIFIC_FILTERS = 'specificFilters'
+const FILTER_ACTIVE_COLOR = '#7446bd'
+const FILTER_INACTIVE_COLOR = 'rgb(137, 137, 137)'
 
 const PLATFORM_FILTER_ELEMENT = document.getElementById('platformFilter')
 const GENRE_FILTER_ELEMENT = document.getElementById('genreFilter')
+const TAG_FILTER_ELEMENT = document.getElementById('tagFilter')
+
 const GAME_LIST_ELEMENT = document.getElementById('gameList')
 const SEARCH_TEXT_BOX = document.getElementById('titleSearchBox')
 
+
 const SEARCH_BUTTON = document.getElementById('searchButton')
 const PAGE_NAVIGATOR = document.getElementById('pageNaviagtion')
+const PAGE_DISPLAY = document.getElementById('pageDisplay')
 
 const SORT_BUTTON = document.getElementById('searchSortButton')
-const SORT_TYPES = ['rating', 'name', '-name']
+const SORT_TYPES = ['-rating', 'rating', 'name', '-name']
+
+const SEARCH_SIZE_BUTTON = document.getElementById('searchSizeButton')
+const SEARCH_SIZES = [10, 20, 30, 40]
 
 let fetchPosition = 'games'
 
 let filterPlatforms = []
 let filterGenres = []
+let filterTags = []
 
 let currentPage = 1
+let totalPages = 1
 
 let finishedURL = '';
 let searchSort = ''
@@ -36,7 +46,6 @@ function getFilterData (url, displayFunction, displayElement, filterClass, filte
         return results.json()
     })
     .then(function (resultData) {
-        console.log(resultData)
         displayFunction(resultData.results, displayElement, filterClass, filterTracker)
     })
     .catch(function(error) {
@@ -44,39 +53,32 @@ function getFilterData (url, displayFunction, displayElement, filterClass, filte
     })
 }
 
+//displays the switches to toggle game filters
 function displayFilters(info, element, elementName, filterTracker) {
     
     let tempString = info.map(function (filterElement) {
-        return `<div class="filterBox">
-        <input type="checkbox" name="" class="${elementName}Item" id="${filterElement.id}">
-        <h4>${filterElement.name}</h4>
+        
+        return `<div class="form-check form-switch">
+        <input class="${elementName} form-check-input" type="checkbox" role="switch" onClick="toggleFilter(${filterTracker}, ${filterElement.id})" id="${filterTracker}-${filterElement.id}">
+        <label class="form-check-label" for="${filterTracker}-${filterElement.id}">${filterElement.name}</label>
       </div>`
     })
     element.innerHTML = tempString.join('')
-    console.log(element.getElementsByClassName(`${elementName}Item`))
-    let filters = element.getElementsByClassName(`${elementName}Item`)
-    for (let index = 0; index < filters.length; index++) {
-        const element = filters[index];
-        element.addEventListener('change', function() {
-            
-            console.log(filters[index].id)
-            if (filterTracker.includes(filters[index].id))
+    
+}
+
+//toggles the game filters by type
+function toggleFilter (filterType, itemID) {
+    if (filterType.includes(itemID))
             {
-                console.log(filterTracker.findIndex(function(index) {
-                    return index == filters[index].id
-                }))
-                filterTracker.splice(filterTracker.findIndex(function(index) {
-                    return index == filters[index].id
+                filterType.splice(filterType.findIndex(function(index) {
+                    return index == itemID
                 }), 1)
             }
             else
             {
-                filterTracker.push(filters[index].id)
+                filterType.push(itemID)
             }
-            console.log(filterTracker)
-        })
-        
-    }
 }
 
 function getGameData (urlKeys, displayFunction) {
@@ -85,9 +87,10 @@ function getGameData (urlKeys, displayFunction) {
         return results.json()
     })
     .then (function (gameResults) {
-        console.log(gameResults)
         displayFunction(gameResults.results)
         displayPageNavigator(gameResults)
+        totalPages = (Math.ceil(gameResults.count/pageSize))
+        PAGE_DISPLAY.innerHTML = `Page ${currentPage}/${totalPages}`
     })
     .catch(function (error) {
         console.log(error)
@@ -104,7 +107,7 @@ function displayPageNavigator (info) {
     }
     else 
     {
-        nextPage = `<li class="page-item"><button class="page-link" id="nextButton">Next</button></li>`
+        nextPage = `<li class="page-item"><button class="page-link" onClick="changePage('${info.next}', 'next')" id="nextButton">Next</button></li>`
     }
     if (info.previous == null)
     {
@@ -112,45 +115,76 @@ function displayPageNavigator (info) {
     }
     else 
     {
-        previousPage = `<li class="page-item"><button class="page-link" id="previousButton">Previous</button></li>`
+        previousPage = `<li class="page-item"><button class="page-link" onClick="changePage('${info.previous}', 'previous')" id="previousButton">Previous</button></li>`
     }
     PAGE_NAVIGATOR.innerHTML = `${previousPage}${nextPage}`
-    let nextPageButton = document.getElementById('nextButton')
-    let previousPageButton = document.getElementById('previousButton')
-        nextPageButton.addEventListener('click', function () {
-            currentPage++
-            getGameData(info.next, displayGame)
-        })
     
-        previousPageButton.addEventListener('click', function () {
-            currentPage--
-            getGameData(info.previous, displayGame)
-        })
     
 }
 
+function changePage(pageURL, modifier, pageNumber = -1) {
+    getGameData(pageURL, displayGame)
+    if (modifier == 'next')
+    {
+        currentPage++
+    }
+    if (modifier == 'previous')
+    {
+        currentPage--
+    }
+    if (modifier == 'change')
+    {
+        currentPage = pageNumber
+    }
+    PAGE_DISPLAY.innerHTML = `Page ${currentPage}/${totalPages}`
+}
+//creates game cards from 'info' object used
 function displayGame (info) {
     let tempString = info.map(function (game) {
+        let imageElement = '';
+        let tempTagsString = ''
+        if (game.background_image == null)
+        {
+            imageElement = `<img src="images/no-image-icon.png" alt="No Image Found" class="gameImage rounded img-thumbnail" />`
+        }
+        else
+        {
+            imageElement = `<img src="${game.background_image}" alt="No Image Found" class="gameImage rounded img-thumbnail" />`
+        }
+
+        tempTagsString = game.tags.map(function (tag) {
+            return `<li class="rounded"><span>${tag.name}</span></li>`
+        })
+
         return `<li class="gameCard">
         <a href="gamedetails.html?id=${game.id}" class="card">
-          <img src="${game.background_image}" alt="No Image Found" class="gameImage" />
+          ${imageElement}
           <div class="cardBody">
-            <h3 class="gameName">${game.name}</h3>
-            <p class="gameShortDescription">test</p>
+          <span class="gameRating">${game.rating}/5</span>          
+            <span class="gameName">${game.name}</span>
+            <div class="tagDisplay">
+                  <span>Tags:</span>
+                  <ul class="tagText">
+                    ${tempTagsString.join('')}
+                  </ul>
+                </div>
+            
           </div>
         </a>
       </li>`
     })
     GAME_LIST_ELEMENT.innerHTML = tempString.join('')
 }
-
+//Creates the search filters
 function gameSearchSetup () {
     let fullPlatformString = ''
     let fullGenreString = ''
-    if (filterPlatforms.length > 0 && filterGenres.length > 0)
+    let fullTagString = ''
+    if (filterPlatforms.length > 0 && filterGenres.length > 0 && filterTags.length > 0)
     {
         fullPlatformString = `platforms=${filterPlatforms.join(',')}`
-        fullGenreString = `&genres=${filterGenres.join(',')}&`
+        fullGenreString = `&genres=${filterGenres.join(',')}`
+        fullTagString = `&tags=${filterTags.join(',')}&`
     }
     else if(filterPlatforms.length > 0)
     {
@@ -160,8 +194,12 @@ function gameSearchSetup () {
     {
         fullGenreString = `genres=${filterGenres.join(',')}&`
     }
+    else if (filterTags.length > 0)
+    {
+        fullTagString = `tags=${filterTags.join(',')}&`
+    }
 
-    return `${fullPlatformString}${fullGenreString}`
+    return `${fullPlatformString}${fullGenreString}${fullTagString}`
 }
 
 SEARCH_BUTTON.addEventListener('click', function () {
@@ -170,17 +208,23 @@ SEARCH_BUTTON.addEventListener('click', function () {
     getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&search_precise=True&search_exact=True&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
 })
 
+//used by sort dropdown buttons to set up sort parameters
 function sortSetup(index) {
-    let sortButton = document.getElementById('searchSortButton')
+    
     let menuItems = SORT_BUTTON.parentElement.querySelectorAll('.dropdown-item')
     searchSort = SORT_TYPES[index]
-    console.log(SORT_BUTTON.innerText)
-    console.log(menuItems[index])
-    sortButton.innerHTML = menuItems[index].innerHTML
+    SORT_BUTTON.innerHTML = menuItems[index].innerHTML
 }
 
-searchSort = 'rating'
+function searchSizeChange (index) {
+    pageSize = SEARCH_SIZES[index]
+    SEARCH_SIZE_BUTTON.innerHTML = `${pageSize} items per page`
+}
+
+searchSort = SORT_TYPES[0]
+searchSizeChange(0)
 SORT_BUTTON.innerHTML = "Highest Rated"
-getFilterData('genres', displayFilters, GENRE_FILTER_ELEMENT, GENRE_FILTER_CLASS, filterGenres)
-getFilterData('platforms', displayFilters, PLATFORM_FILTER_ELEMENT, PLATFORM_FILTER_CLASS, filterPlatforms)
+getFilterData('genres', displayFilters, GENRE_FILTER_ELEMENT, SPECIFIC_FILTERS, 'filterGenres')
+getFilterData('platforms', displayFilters, PLATFORM_FILTER_ELEMENT, SPECIFIC_FILTERS, 'filterPlatforms')
+getFilterData('tags', displayFilters, TAG_FILTER_ELEMENT, SPECIFIC_FILTERS, 'filterTags')
 getGameData(lookAtPage('games', `ordering=${searchSort}&page_size=${pageSize}&`), displayGame)

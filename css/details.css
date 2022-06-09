@@ -1,57 +1,56 @@
-
-.tabs{
-    width: 100%;
-    height: 350px;
-}
-.tabs .tab_bar{
-    height: 15%;
-}
-.tabs .tab_bar button{
-    width: 25%;
-    height: 100%;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 10px;
-    background-color: rgb(145, 10, 10);
-
-}
-.tabs .tab_bar button:hover{
-    background-color: #d7d4d4;
-}
-.tabs .tabsPanel{
-    height: 85%;
-    color: white;
-    text-align: center;
-    padding-top: 50px;
-}
-
-img {
-    max-width: 50%;
-    max-height: 50%;
-    display: block;
+#gameBackground {
+    max-width: 100%;
+    display: flex;
     margin: auto;
    }
 
 
 #detailWindow {
     display: flex;
+    margin: 1rem;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 #detailHeader {
     display: flex;
     justify-content: space-evenly;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-top-color: white;
 }
 
-#detailBody {
-    display: block;
-    justify-content: space-evenly;
-    text-align: center;
+.detailBody {
+    padding: 2rem;
     
+}
+
+#ESRBRating {
+    max-width: 5rem;
 }
 
 #gameTitle {
     text-align: center;
+}
+
+.platformCard {
+    list-style: none;
+    margin: 1rem;
+    min-width: 3rem;
+}
+
+#platformList {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+    justify-content: space-evenly;
+}
+
+#platformsHeader {
+    text-align: center;
+    border-bottom-color: white;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
 }

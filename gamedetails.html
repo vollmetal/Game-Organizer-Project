@@ -1,91 +1,49 @@
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-          crossorigin="anonymous"
-        />
-    
-        <link rel="stylesheet" href="css/details.css">
-        <link rel="stylesheet" href="css/main.css" />
-        <title>Game App</title>
-      </head>
-      <body>
-        <header>
-            <nav class="navbar navbar-expand-lg">
-                <div class="container-fluid">
-                    <a class="btn navbar-brand" href="index.html">SITE</a>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                          <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                          </li>
-                          
-                        </ul>
-                      </div>
-                </div>
-                
-            </nav>
-            
-          <form id="form"></form>
-        </header>
-        <div class="detailBody">
-          <h1 id="gameTitle">Game Title</h1>
-          <img src="" alt="" id="gameBackground">
-          <div class="tabs">
-            <div class="tabs_bar">
-              <button onclick="showPanel(0, 'gray')">Details</button>
-              <button onclick="showPanel(1, 'gray')">News</button>
-              <button onclick="showPanel(2, 'gray')">Reviews</button>
-              <button onclick="showPanel(3, 'gray')">Platforms</button>
-            </div>
-            <div class="tabPanel">
-              <div id="detailWindow">
-                <div id="detailHeader">
-                  <h2 id="ESRBRating">M</h2>
-                  <h2 id="releaseDate">Released: </h2>
-                </div>
-                <div id="detailBody">
-                  <p id="description">description here</p>
-                  
-                </div>
-                
-                
-              </div>
-              <div class="platforms">
-                <h1>Released Platforms</h1>
-                <ul class="listContent" id="reviewList">
-                  <li class="reviewCard">
-                    <div class="card">
-                      
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              
-            </div>
-            <div class="tabPanel">content 2</div> 
-            <div class="tabPanel">
-              <div id="reviewsTab">
-                <h1 id="reviewTitle">Metacritic Reviews</h1>
-                
-              </div>
-            </div>
-            <div class="tabPanel">content 4</div>
-          </div>
-        </div>
-        <script src="js/detailPage.js"></script>
-        <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-      crossorigin="anonymous"
-    ></script>
-      </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="css/details.css">
+  <link rel="stylesheet" href="css/main.css" />
+  <title>Game App</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="btn navbar-brand" href="index.html">ObsidianDB</a>
+      </div>
+
+    </nav>
+
+    <form id="form"></form>
+  </header>
+  <div class="detailBody">
+    <h1 id="gameTitle">Game Title</h1>
+    <img src="" alt="" id="gameBackground">
+    <div id="detailWindow">
+      <h1>Game Details</h1>
+      <div id="detailHeader">
+        <h2 id="ESRBRating">M</h2>
+        <h2 id="releaseDate">Released: </h2>
+      </div>
+      <div id="detailBody">
+        <p id="description">description here</p>
+      </div>
+      
+    </div>
+    <h3 id="platformsHeader">Available on</h3>
+    <ul id="platformList"></ul>
+  </div>
+  <script src="js/detailPage.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
