@@ -1,8 +1,28 @@
 body {
-    background-color: #202020;
+    background-color: #17162c;
     color: white;
 }
+#brandName {
+        text-align: center;
+        font-weight: 900;
+        font-size: 56px;
+        line-height: 1.2;
+        text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00, 6px -4px 6px #A60824;
+        color: #350b0e;
+        background: #17162C;
+}
+.nav-item h3 {
+    padding-top: 25px;
+    color: rgb(45, 142, 172);
+}
 
+.filterBox .genreFilterItem {
+    padding-top: 20px;
+}
+
+.filterBox h9 {
+    padding-left: 10px;
+}
 a {
     color: black;
     text-decoration: none;
@@ -49,8 +69,8 @@ a {
 }
 
 .gameCard {
-    max-width: 10rem;
-    max-height: 10rem;
+    max-width: 15rem;
+    max-height: 15rem;
     margin-right: 5rem;
     margin-top: 5rem;
     margin-bottom: 5rem;
@@ -63,7 +83,12 @@ a {
     background-color:  rgb(137, 137, 137);
     color: black;
 }
+.card .gameImage {
+    width: 100%;
+    height: 5vw;
+    object-fit: cover;
 
+}
 #pageNaviagtion {
     padding-top: 1rem;
     display: flex;
@@ -73,6 +98,7 @@ a {
 .searchFilter {
     display: flex;
     flex-direction: column;
+
 }
 .filterBox {
     display: flex;
