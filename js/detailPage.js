@@ -101,16 +101,26 @@ function drawPlatformsTab(info) {
         let platformRequirements = ''
         let platformId = -1
         let platformRatingElement = ''
+        let platformMinimumRequirement = ''
+        let platformMaximumRequirement = ''
         //Set Requirements Section
-        if (platform.requirements.minimum == null && platform.requirements.recommended == null) {
 
-        }
-        else {
+            if (platform.requirements.minimum == null) {
+
+            }
+            else {
+                platformMinimumRequirement = `<p class="minimumRequirements">${platform.requirements.minimum}</p>`
+            }
+            if (platform.requirements.recommended == null) {
+
+            }
+            else {
+                platformMaximumRequirement = `<p class="maximumRequirements">${platform.requirements.recommended}</p>`
+            }
             platformRequirements = `<div class="platformSpecs">
-            <p class="minimumRequirements">${platform.requirements.minimum}</p>
-            <p class="maximumRequirements">${platform.requirements.recommended}</p>
+            ${platformMinimumRequirement}
+            ${platformMaximumRequirement}
           </div>`
-        }
         //Set Ratings Section
         if (info.metacritic_platforms.length > 0) {
             for (let index = 0; index < info.metacritic_platforms.length; index++) {
