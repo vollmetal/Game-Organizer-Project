@@ -13,6 +13,15 @@ a {
     color: black;
 }
 
+.page-link {
+    background-color: rgb(137, 137, 137);
+    color: black;
+}
+
+.accordion {
+    --bs-accordion-btn-padding-y: 0.5rem;
+}
+
 .accordion-button {
     background-color: rgb(137, 137, 137);
     color: black;
@@ -49,6 +58,7 @@ a {
 .cardBody {
     display: flex;
     flex-direction: column;
+    padding: 0.5rem;
 }
 
 
@@ -77,20 +87,28 @@ a {
 
 .gameCard {
     max-width: 14rem;
-    margin-right: 3rem;
-    margin-top: 5rem;
-    margin-bottom: 3rem;
+    margin-right: 1rem;
+    margin-top: 2rem;
 }
 
 .gameRating {
+    padding-right: 10px;
     text-align: end;
 }
 
 .gameImage {
-    max-height: 14rem;
+    width: 20rem;
+    height: 10rem;
+    object-fit: contain;
 }
 
-
+.gameName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    white-space: nowrap;
+}
 
 #pageNaviagtion {
     padding-top: 1rem;
@@ -112,19 +130,25 @@ a {
     margin-bottom: 0.5rem;
 }
 #filterBar {
-    max-width: 13rem;
-    padding: 1rem;
+    width: 13rem;
 }
 
 .tagText {
     display: flex;
+    align-content: baseline;
     flex-wrap: wrap;
+    height: 7rem;
+    overflow: auto;
 }
 .tagText li {
     background-color: rgb(52, 52, 52);
     color: white;
     padding: 2px;
     margin: 4px;
+}
+
+#titleSearchBox {
+    line-height: 32px;
 }
 
 @media (max-width: 780px)

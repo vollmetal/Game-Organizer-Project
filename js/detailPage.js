@@ -49,7 +49,7 @@ function drawDetailTab(info) {
     //Create the ESRB rating element to display
     let ratingElement = ''
     if (info.esrb_rating == null) {
-        ratingElement = `<h2 id="ESRBRating">NOT YET RATED</h2>`
+        ratingElement = `<img id="ESRBRating" src="images/ESRB/rating pending.svg" alt="">`
     }
     else {
         if (info.esrb_rating.name == "Adults Only") {
@@ -156,6 +156,10 @@ function drawPlatformsTab(info) {
     })
     platformList.innerHTML = platforms.join('')
 
+}
+
+function returnToMainPage () {
+    window.history.back()
 }
 //creates the title and main image
 function drawTop(info) {

@@ -79,6 +79,8 @@ function toggleFilter (filterType, itemID) {
             {
                 filterType.push(itemID)
             }
+            currentPage = 1
+    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&search_precise=True&search_exact=True&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
 }
 
 function getGameData (urlKeys, displayFunction) {
@@ -214,11 +216,15 @@ function sortSetup(index) {
     let menuItems = SORT_BUTTON.parentElement.querySelectorAll('.dropdown-item')
     searchSort = SORT_TYPES[index]
     SORT_BUTTON.innerHTML = menuItems[index].innerHTML
+    currentPage = 1
+    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&search_precise=True&search_exact=True&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
 }
 
 function searchSizeChange (index) {
     pageSize = SEARCH_SIZES[index]
     SEARCH_SIZE_BUTTON.innerHTML = `${pageSize} items per page`
+    currentPage = 1
+    getGameData(lookAtPage('games', `${gameSearchSetup()}search=${SEARCH_TEXT_BOX.value}&search_precise=True&search_exact=True&ordering=${searchSort}&page_size=${pageSize}&`), displayGame)
 }
 
 searchSort = SORT_TYPES[0]
