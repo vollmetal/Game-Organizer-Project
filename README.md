@@ -7,13 +7,15 @@ The home page of the site sorts the games it gets by highest rating to start, wi
 The main page displays the games in the database sorted by either rating or alphabetical order and filtered by genre, platforms, and tags specified in the menu on the left side of the page.
 Each card displays a cover image, rating, the name, and tags for a game and clicking on it takes you to the details page for it where the description, platforms, rating, and release date are displayed.
 
-
-## Languages used
-Javascript, HTML, and CSS
+## Preview of the site
+![Screenshot (600)](https://user-images.githubusercontent.com/102641956/173097186-8ff7a214-9246-4687-a91c-a04d28349650.png)
+## Site link
+[ObsidianApp](https://fantastic-rugelach-ec1c06.netlify.app)
+## Languages and frameworks used
+Javascript, HTML, Bootstrap, and CSS
 ## API used
-RAWG API, Bootstrap
-## Database used
-RAWG Database
-## Contributors
+RAWG API 
 
-@vollmetal @ARMasaki
+## Created by
+[Sarah Avins](https://github.com/vollmetal)
+[Rei Masaki](https://github.com/ARMasaki)
