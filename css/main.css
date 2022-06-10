@@ -9,12 +9,12 @@ a {
 }
 
 .btn {
-    background-color: rgb(171, 62, c);
+    background-color: #7c78bf;
     color: black;
 }
 
 .page-link {
-    background-color: rgb(137, 137, 137);
+    background-color: #7c78bf;
     color: black;
 }
 
@@ -23,27 +23,27 @@ a {
 }
 
 .accordion-button {
-    background-color: rgb(137, 137, 137);
+    background-color: #7c78bf;
     color: black;
 }
 
 .accordion-collapse {
-    background-color: rgb(137, 137, 137);
+    background-color: #7c78bf;
     color: black;
 }
 
 .accordian-item {
-    background-color: rgb(137, 137, 137);
+    background-color: #7c78bf;
     color: black;
 }
 
 .img-thumbnail {
     border-width: 0px;
-    background-color: rgb(137, 137, 137);
+    background-color: #7c78bf;
 }
 
 .navBar {
-    background-color: rgb(137, 137, 137);
+    background-color: #7c78bf;
     color: white;
     text-align: center;
     list-style-position: inside;
@@ -51,7 +51,7 @@ a {
 }
 
 .card {
-    background-color:  rgb(137, 137, 137);
+    background-color:  #7c78bf;
     color: black;
 }
 
@@ -141,7 +141,7 @@ a {
     overflow: auto;
 }
 .tagText li {
-    background-color: rgb(52, 52, 52);
+    background-color: #7c78bf;
     color: white;
     padding: 2px;
     margin: 4px;
