@@ -8,6 +8,16 @@ a {
     text-decoration: none;
 }
 
+#titleButton {
+    font-weight: bold;
+    font-size: 32px;
+}
+
+#siteHead {
+    display: flex;
+    justify-content: center;
+}
+
 .btn {
     background-color: #7c78bf;
     color: black;
@@ -141,7 +151,8 @@ a {
     overflow: auto;
 }
 .tagText li {
-    background-color: #7c78bf;
+    background-color: #3f3d6b;
+
     color: white;
     padding: 2px;
     margin: 4px;
