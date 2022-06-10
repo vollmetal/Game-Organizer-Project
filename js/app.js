@@ -41,7 +41,7 @@ function lookAtPage (positions = '', keys = '') {
 }
 
 function getFilterData (url, displayFunction, displayElement, filterClass, filterTracker) {
-    fetch(lookAtPage(url))
+    fetch(lookAtPage(url, 'page_size=40&'))
     .then(function (results) {
         return results.json()
     })
