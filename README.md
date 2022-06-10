@@ -8,7 +8,7 @@ The main page displays the games in the database sorted by either rating or alph
 Each card displays a cover image, rating, the name, and tags for a game and clicking on it takes you to the details page for it where the description, platforms, rating, and release date are displayed.
 
 ## Preview of the site
-![Screenshot (600)](https://user-images.githubusercontent.com/102641956/173097186-8ff7a214-9246-4687-a91c-a04d28349650.png)
+![Screenshot (601)](https://user-images.githubusercontent.com/102641956/173098118-cbd17373-1fe6-441d-a1a0-ed885bd61573.png)
 ## Site link
 [ObsidianApp](https://fantastic-rugelach-ec1c06.netlify.app)
 ## Languages and frameworks used
