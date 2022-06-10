@@ -16,4 +16,4 @@ RAWG API, Bootstrap
 RAWG Database
 ## Contributors
 
-@vollmetal
+@vollmetal @ARMasaki
