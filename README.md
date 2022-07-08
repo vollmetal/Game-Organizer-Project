@@ -1,4 +1,4 @@
-# Game-Organizer-Project
+# Obsidian.io
 
 Welcome to to Game Organizer Project. This is a site that uses the RAWG.io API and database to organize and display information about games. 
 
